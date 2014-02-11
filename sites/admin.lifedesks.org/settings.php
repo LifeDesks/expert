@@ -1,5 +1,5 @@
 <?php
-// $Id: default.settings.php,v 1.8.2.4 2009/09/14 12:59:18 goba Exp $
+// $Id: default.settings.php,v 1.8.2.5 2010/12/15 13:21:14 goba Exp $
 
 /**
  * @file
@@ -89,16 +89,28 @@
  *   $db_url = 'mysqli://username:password@localhost/databasename';
  *   $db_url = 'pgsql://username:password@localhost/databasename';
  */
+$db_url = 'mysqli://lifedesk:lifedesk@localhost/lifedesk_production';
+$db_prefix = '';
 
-$conf['_lifedesks_domain'] = "lifedesks.org";
-$conf['file_directory_path'] = "files/lifedesk_admin";
-//$conf['cache_inc'] = './sites/all/modules/memcache/memcache.inc';
-//$conf['memcache_servers'] = array('10.19.19.24:11211' => 'default');
-//$conf['memcache_key_prefix'] = $subd;
-
-$db_prefix = "";
-$base_url = "http://admin." . $conf['_lifedesks_domain'];
-$db_url = "mysqli://lifedesk:lifedesk@127.0.0.1/lifedesk_production";
+/**
+ * Database default collation.
+ *
+ * All data stored in Drupal is in UTF-8. Certain databases, such as MySQL,
+ * support different algorithms for comparing, indexing, and sorting characters;
+ * a so called "collation". The default collation of a database normally works
+ * for many use-cases, but depending on the language(s) of the stored data, it
+ * may be necessary to use a different collation.
+ * Important:
+ * - Only set or change this value BEFORE installing Drupal, unless you know
+ *   what you are doing.
+ * - All database tables and columns should be in the same collation. Otherwise,
+ *   string comparisons performed for table JOINs will be significantly slower.
+ * - Especially when storing data in German or Russian on MySQL 5.1+, you want
+ *   to use the 'utf8_unicode_ci' collation instead.
+ *
+ * @see http://drupal.org/node/772678
+ */
+# $db_collation = 'utf8_general_ci';
 
 /**
  * Access control for update.php script
@@ -110,27 +122,6 @@ $db_url = "mysqli://lifedesk:lifedesk@127.0.0.1/lifedesk_production";
  * and change the TRUE back to a FALSE!
  */
 $update_free_access = FALSE;
-
-/**
- * Base URL (optional).
- *
- * If you are experiencing issues with different site domains,
- * uncomment the Base URL statement below (remove the leading hash sign)
- * and fill in the absolute URL to your Drupal installation.
- *
- * You might also want to force users to use a given domain.
- * See the .htaccess file for more information.
- *
- * Examples:
- *   $base_url = 'http://www.example.com';
- *   $base_url = 'http://www.example.com:8888';
- *   $base_url = 'http://www.example.com/drupal';
- *   $base_url = 'https://www.example.com:8888/drupal';
- *
- * It is not allowed to have a trailing slash; Drupal will add it
- * for you.
- */
-# $base_url = 'http://www.example.com';  // NO trailing slash!
 
 /**
  * PHP settings:
@@ -189,7 +180,7 @@ ini_set('url_rewriter.tags',        '');
  *
  * Remove the leading hash signs to enable.
  */
-# $conf = array(
+$conf = array(
 #   'site_name' => 'My Drupal site',
 #   'theme_default' => 'minnelli',
 #   'anonymous' => 'Visitor',
@@ -230,7 +221,13 @@ ini_set('url_rewriter.tags',        '');
  * your web server spoofing the X-Forwarded-For headers.
  */
 #   'reverse_proxy_addresses' => array('a.b.c.d', ...),
-# );
+
+/**
+ * Custom settings for LifeDesks
+ */
+  '_lifedesks_domain' => 'lifedesks.org',
+  'file_directory_path' => 'files/lifedesk_admin'
+);
 
 /**
  * String overrides:
@@ -245,3 +242,24 @@ ini_set('url_rewriter.tags',        '');
 #   'forum'      => 'Discussion board',
 #   '@count min' => '@count minutes',
 # );
+
+/**
+ * Base URL (optional).
+ *
+ * If you are experiencing issues with different site domains,
+ * uncomment the Base URL statement below (remove the leading hash sign)
+ * and fill in the absolute URL to your Drupal installation.
+ *
+ * You might also want to force users to use a given domain.
+ * See the .htaccess file for more information.
+ *
+ * Examples:
+ *   $base_url = 'http://www.example.com';
+ *   $base_url = 'http://www.example.com:8888';
+ *   $base_url = 'http://www.example.com/drupal';
+ *   $base_url = 'https://www.example.com:8888/drupal';
+ *
+ * It is not allowed to have a trailing slash; Drupal will add it
+ * for you.
+ */
+$base_url = 'http://admin.' . $conf['_lifedesks_domain'];  // NO trailing slash!
