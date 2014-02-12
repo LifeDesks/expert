@@ -80,6 +80,10 @@ projects[wysiwyg][version] = 2.1
 projects[wysiwyg][patch][] = https://raw.github.com/LifeDesks/patches/master/wysiwyg-module-remove-clear-caches-from-update.patch
 
 ; Libraries
+libraries[tinymce][download][type] = get
+libraries[tinymce][download][url] = http://sourceforge.net/projects/tinymce/files/TinyMCE/3.2.7/tinymce_3_2_7.zip/download
+libraries[tinymce][directory_name] = tinymce
+
 ; solrphpclient requires apachesolr module to be downloaded first
 libraries[solrphpclient][download][type] = get
 libraries[solrphpclient][download][url] = https://solr-php-client.googlecode.com/files/SolrPhpClient.r22.2009-11-09.zip
@@ -102,11 +106,26 @@ libraries[jquery.ui][overwrite] = TRUE
 libraries[jquery.ui][destination] = modules/jquery_ui
 libraries[jquery.ui][directory_name] = jquery.ui
 
+; Themes
+projects[zen][version] = 2.0-beta1
+projects[zen][patch][] = https://raw.github.com/LifeDesks/patches/master/zen-theme-conditional-styles.patch
+
+
+; Custom modules
 ; Cheating here using libraries to download multiple custom modules at once.
-libraries[custom][download][type] = git
-libraries[custom][download][url] = git://github.com/LifeDesks/modules.git
-libraries[custom][download][branch] = master
-libraries[custom][overwrite] = TRUE
-libraries[custom][destination] = .
-libraries[custom][directory_name] = modules
+libraries[custom.modules][download][type] = git
+libraries[custom.modules][download][url] = git://github.com/LifeDesks/modules.git
+libraries[custom.modules][download][branch] = master
+libraries[custom.modules][overwrite] = TRUE
+libraries[custom.modules][destination] = .
+libraries[custom.modules][directory_name] = modules
+
+; Custom themes
+; Cheating here using libraries to download multiple custom themes at once
+libraries[custom.themes][download][type] = git
+libraries[custom.themes][download][url] = git://github.com/LifeDesks/themes.git
+libraries[custom.themes][download][branch] = master
+libraries[custom.themes][overwrite] = TRUE
+libraries[custom.themes][destination] = .
+libraries[custom.themes][directory_name] = themes
 
