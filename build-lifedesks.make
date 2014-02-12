@@ -5,12 +5,12 @@ api = 2
 core = 6.x
 
 ; Add Drupal core and apply custom patches
-includes[] = drupal-org-core.make
+includes[] = https://raw.github.com/LifeDesks/expert/master/drupal-org-core.make
 
 ; Add contributed and custom modules, themes and libraries destined for sites/all/
-includes[] = shared.make
+includes[] = https://raw.github.com/LifeDesks/expert/master/shared.make
 
-; Add expert profile and...?
+; Add expert profile
 projects[expert][type] = profile
 projects[expert][download][type] = git
 projects[expert][download][url] = git://github.com/LifeDesks/expert.git
